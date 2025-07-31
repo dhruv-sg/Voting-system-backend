@@ -1,0 +1,34 @@
+make a serever side voting application
+
+
+app functionality
+
+1.user sign in/sign up
+2.see the list of candidates
+3.vote one candidates
+4.live voting result
+5.list of candidates
+6.admin panel
+
+
+routes:-
+
+user authentication
+
+/signup: --> create new user
+/login:  --> for log in exsiting user
+
+
+/candidates --> get the list of candidates
+/vote/candidateid: --> post method for voting
+
+/vote/counts --> get the candidates by there voting count
+
+
+/profile: get user profile info.
+/profile/password: --> chnage user password
+
+
+/candidates: -->post create new candidate
+/candidates/candidateid: --> put update the candidate details
+/candidates/candidateid: --> delete candidate
