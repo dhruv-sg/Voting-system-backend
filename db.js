@@ -19,5 +19,6 @@ mongoose.connect(mongoURL, {
 .catch((err) => {
   console.error(' MongoDB connection error:', err);
 });
+//databse
 
 module.exports = mongoose.connection;
