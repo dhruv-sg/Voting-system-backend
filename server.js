@@ -5,7 +5,9 @@ const db = require('./db');
 
 const cors = require('cors');
 app.use(cors());
-
+// 🟢 These two lines are super important:
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); 
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 

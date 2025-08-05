@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVote - Online Voting System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 160px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-login {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.3);
+        }
+
+        .btn-signup {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78,205,196,0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            color: rgba(255,255,255,0.85);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .documentation {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        .doc-title {
+            color: #333;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .doc-content {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .doc-section {
+            margin-bottom: 30px;
+        }
+
+        .doc-section h3 {
+            color: #444;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        .doc-section p {
+            margin-bottom: 15px;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .btn {
+                width: 220px;
+            }
+            
+            .documentation {
+                padding: 30px 20px;
+                margin-top: 40px;
+            }
+            
+            .doc-title {
+                font-size: 1.8rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .feature-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px 0;
+                margin-bottom: 40px;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .main-content {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-indicator">
+        🟢 System Online
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">SecureVote</h1>
+            <p class="subtitle">Transparent • Secure • Democratic</p>
+        </header>
+
+        <main class="main-content">
+            <div class="button-container">
+                <button class="btn btn-login" onclick="handleLogin()">
+                    🔐 Login
+                </button>
+                <button class="btn btn-signup" onclick="handleSignup()">
+                    ✨ Sign Up
+                </button>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Secure Voting</h3>
+                    <p class="feature-desc">End-to-end encryption ensures your vote remains private and secure throughout the entire process.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Real-time Results</h3>
+                    <p class="feature-desc">Watch results update live with transparent counting mechanisms and instant verification.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3 class="feature-title">Verified Identity</h3>
+                    <p class="feature-desc">Multi-factor authentication prevents fraud and ensures every vote comes from a legitimate user.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Accessible Anywhere</h3>
+                    <p class="feature-desc">Vote from anywhere with internet access on any device - desktop, tablet, or mobile.</p>
+                </div>
+            </div>
+        </main>
+
+        <section class="documentation">
+            <h2 class="doc-title">System Documentation</h2>
+            <div class="doc-content">
+                <div class="doc-section">
+                    <h3>Getting Started</h3>
+                    <p>Welcome to SecureVote, a comprehensive online voting platform designed for transparency and security. To begin using the system, create an account using the Sign Up button above, or log in with your existing credentials.</p>
+                    <p>New users will need to verify their identity through our secure authentication process before gaining access to voting features.</p>
+                </div>
+
+                <div class="doc-section">
+                    <h3>Security & Privacy</h3>
+                    <p>Our platform implements military-grade security measures including AES-256 encryption, blockchain verification, and multi-factor authentication. All votes are anonymized and stored using cryptographic hashing.</p>
+                    <p>Your personal information is protected according to industry standards, and voting data is kept completely separate from user identity information.</p>
+                </div>
+
+                <div class="doc-section">
+                    <h3>How to Vote</h3>
+                    <p>Once authenticated, you can view all active elections and polls. Each voting session includes candidate information, voting deadlines, and clear instructions.</p>
+                    <p>After casting your vote, you'll receive a confirmation receipt with a unique transaction ID for verification purposes. The system prevents duplicate voting automatically.</p>
+                </div>
+
+                <div class="doc-section">
+                    <h3>Technical Specifications</h3>
+                    <p>Built on Node.js backend with robust database architecture. The system supports thousands of concurrent users and provides 99.9% uptime during election periods.</p>
+                    <p>API endpoints are available for developers who need to integrate voting functionality into their own applications or systems.</p>
+                </div>
+
+                <div class="doc-section">
+                    <h3>Support & Contact</h3>
+                    <p>For technical support, security concerns, or general inquiries, our support team is available 24/7 during active voting periods. We also provide comprehensive help documentation and video tutorials.</p>
+                    <p>Emergency support is available for critical issues that may affect voting integrity or system availability.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            // Simple loading state
+            btn.innerHTML = '🔄 Connecting...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                
+                // Replace with your actual login route
+                 window.location.href = '/signup';
+                window.location.href = 'signup.html';
+            }, 800);
+        }
+
+        function handleSignup() {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            // Simple loading state
+            btn.innerHTML = '🔄 Processing...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                
+                // Replace with your actual signup route
+               window.location.href = '/signup';
+                window.location.href = 'signup.html';
+            }, 800);
+        }
+
+        // Simple user count update (optional - remove if not needed)
+        let userCount = 156;
+        setInterval(() => {
+            userCount += Math.floor(Math.random() * 3) - 1; // Random +1, 0, or -1
+            if (userCount < 50) userCount = 50;
+            if (userCount > 300) userCount = 300;
+            
+            document.querySelector('.status-indicator').innerHTML = `🟢 ${userCount} Active Users`;
+        }, 10000); // Update every 10 seconds instead of 5
+    </script>
+</body>
+</html>
