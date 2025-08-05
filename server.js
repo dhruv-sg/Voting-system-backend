@@ -3,6 +3,9 @@ const app = express();
 require('dotenv').config();
 const db = require('./db');
 
+const cors = require('cors');
+app.use(cors());
+
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
